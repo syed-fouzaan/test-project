@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { invite } from "@/data/invite";
 
+export const dynamic = "force-static";
 export const alt = "Nikah of Zeba Kausar & Mohammed Yasin — 19 December 2026";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
