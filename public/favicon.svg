@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#0B3D2E"/>
+  <!-- 8-point star -->
+  <polygon
+    points="16,4 17.6,11.2 24.8,10 20.8,15.6 26.4,19.2 19.2,19.2 18.4,26.4 14.4,20.8 8,24 10.4,17.6 4,14.4 11.2,13.6"
+    fill="#B8934A"
+  />
+</svg>

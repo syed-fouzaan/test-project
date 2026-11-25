@@ -1,0 +1,293 @@
+/* ============================================================
+   Design tokens — Nikah Invitation (Botanical Ivory & Sage)
+   ============================================================ */
+
+:root {
+  /* Backgrounds */
+  --bg-outer:     #D6CDB8;   /* outer backdrop (linen wall) */
+  --bg-ivory:     #FBF8F2;   /* main canvas */
+  --bg-linen:     #F4EFE4;   /* alternate sections */
+  --bg-card:      #FFFFFF;
+
+  /* Sage palette */
+  --sage-dark:    #3A5236;
+  --sage-mid:     #557050;
+  --sage-soft:    #7E9B78;
+  --sage-pale:    #C8D9C4;
+
+  /* Champagne / Gold */
+  --champagne:    #EDE1CC;
+  --gold-warm:    #B28B45;
+  --gold-pale:    #DFC98A;
+
+  /* Ink / text */
+  --ink-dark:     #1E2A1D;
+  --ink-muted:    #5C6B57;
+  --ink-light:    #8A9985;
+
+  /* Fonts */
+  --font-serif:   var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-script:  var(--font-great-vibes), 'Great Vibes', cursive;
+  --font-sans:    var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
+  --font-arabic:  'Amiri', 'Scheherazade New', serif;
+
+  /* Easings */
+  --ease-silk:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Section separator */
+  --divider: rgba(178, 139, 69, 0.22);
+}
+
+/* ── Emerald Night Theme Variant ────────── */
+[data-theme="night"] {
+  --bg-outer:     #111B10;
+  --bg-ivory:     #192718;
+  --bg-linen:     #20311E;
+  --bg-card:      #243722;
+  --sage-dark:    #DFC98A;
+  --sage-mid:     #C5AD6A;
+  --sage-soft:    #8EA888;
+  --sage-pale:    #2D422B;
+  --ink-dark:     #F6F1E6;
+  --ink-muted:    #C8C2B4;
+  --ink-light:    #93A28F;
+  --divider:      rgba(223, 201, 138, 0.24);
+}
+
+[data-theme="night"] .shimmer-name {
+  background: linear-gradient(
+    110deg,
+    #F6F1E6 20%,
+    #DFC98A 42%,
+    #FFF7DC 50%,
+    #DFC98A 58%,
+    #F6F1E6 80%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="night"] .btn-sage {
+  background: linear-gradient(135deg, #DFC98A 0%, #B28B45 100%);
+  color: #192718;
+}
+
+[data-theme="night"] .btn-ivory {
+  background: rgba(36, 55, 34, 0.9);
+  color: #F6F1E6;
+}
+
+/* ── Focus ring ─────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--sage-mid);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Arabic RTL override ────────────────── */
+[lang="ar"] {
+  direction: rtl;
+  font-family: var(--font-arabic);
+  line-height: 2;
+}
+
+/* ── Scroll container ───────────────────── */
+.invite-scroll {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  height: 100dvh;
+  width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.invite-scroll::-webkit-scrollbar { display: none; }
+
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── Gold Shimmer on Script Names ───────── */
+@keyframes gold-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.shimmer-name {
+  background: linear-gradient(
+    110deg,
+    #1E2A1D 20%,
+    #3A5236 38%,
+    #B28B45 47%,
+    #DFC98A 50%,
+    #B28B45 53%,
+    #3A5236 62%,
+    #1E2A1D 80%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shimmer 5.5s ease-in-out infinite;
+}
+
+/* ── Floating CSS Petals & Dust ─────────── */
+@keyframes petal-drift {
+  0% {
+    transform: translate3d(0, -24px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.65;
+  }
+  85% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(18px, 102dvh, 0) rotate(320deg);
+    opacity: 0;
+  }
+}
+
+.css-petal {
+  position: absolute;
+  top: -20px;
+  pointer-events: none;
+  animation-name: petal-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+/* ── Horizontal Scroll Strip ────────────── */
+.timeline-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.timeline-strip::-webkit-scrollbar { display: none; }
+
+/* ── Pills ──────────────────────────────── */
+.btn-sage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: var(--sage-dark);
+  color: #FBF8F2;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  border: none;
+  box-shadow: 0 6px 20px rgba(58, 82, 54, 0.22);
+  cursor: pointer;
+  transition: transform 0.22s var(--ease-silk), box-shadow 0.22s var(--ease-silk);
+}
+.btn-sage:hover  { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(58, 82, 54, 0.3); }
+.btn-sage:active { transform: translateY(0); }
+
+.btn-ivory {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: rgba(251,248,242,0.9);
+  color: var(--ink-dark);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border-radius: 9999px;
+  border: 1px solid var(--divider);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-silk);
+}
+.btn-ivory:hover { transform: translateY(-1px); }
+
+/* ── Botanical divider ──────────────────── */
+.leaf-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sage-soft);
+  font-size: 14px;
+}
+.leaf-divider::before,
+.leaf-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--divider);
+}
+
+/* ── Section heading ────────────────────── */
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sage-mid);
+}
+
+/* ── Card ────────────────────────────────── */
+.invite-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  border: 1px solid var(--divider);
+  box-shadow: 0 4px 24px rgba(31, 41, 30, 0.07);
+  padding: 24px;
+}
+
+/* ── Reduced motion ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* ── Print / PDF Export ─────────────────── */
+@media print {
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #FFFFFF !important;
+  }
+  .invite-scroll {
+    height: auto !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+  .snap-section {
+    min-height: auto !important;
+    page-break-inside: avoid;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+  .no-print, nav[aria-label="Section navigation"] {
+    display: none !important;
+  }
+  .shimmer-name {
+    -webkit-text-fill-color: #1E2A1D !important;
+    color: #1E2A1D !important;
+    background: none !important;
+  }
+}
