@@ -12,7 +12,6 @@ import Venue from "@/components/Venue";
 import Memories from "@/components/Memories";
 import DuaWall from "@/components/DuaWall";
 import Rsvp from "@/components/Rsvp";
-import Compliments from "@/components/Compliments";
 import Closing from "@/components/Closing";
 import ShareBar from "@/components/ShareBar";
 import SectionDots, { SectionItem } from "@/components/SectionDots";
@@ -28,7 +27,6 @@ const SECTIONS: SectionItem[] = [
   { id: "memories", label: "Memories" },
   { id: "duas", label: "Duas" },
   { id: "rsvp", label: "RSVP" },
-  { id: "compliments", label: "Masjid" },
   { id: "closing", label: "Closing" },
 ];
 
@@ -42,10 +40,17 @@ export default function Home() {
   const [gateOpen, setGateOpen] = useState(false);
   const [recipientName, setRecipientName] = useState<string | undefined>();
   const [lang, setLang] = useState<"en" | "ar">("en");
-  const [theme, setTheme] = useState<"day" | "night">("day");
-  const [soundOn, setSoundOn] = useState(false);
+  const [theme, setTheme] = useState<"day" | "night">("night");
   const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const audioStartedRef = useRef(false);
+
+  function ensureAudioPlaying() {
+    if (audioStartedRef.current) return;
+    if (startAmbientSound()) {
+      audioStartedRef.current = true;
+    }
+  }
 
   useEffect(() => {
     const skipped = sessionStorage.getItem("gate-opened");
@@ -57,7 +62,14 @@ export default function Home() {
     }
     setRecipientName(sanitizeName(params.get("to")));
 
+    // Ensure ambient song starts looping on first user interaction anywhere if gate was skipped
+    const unlockOnGesture = () => {
+      ensureAudioPlaying();
+    };
+    window.addEventListener("pointerdown", unlockOnGesture, { once: true });
+
     return () => {
+      window.removeEventListener("pointerdown", unlockOnGesture);
       stopAmbientSound();
     };
   }, []);
@@ -74,6 +86,7 @@ export default function Home() {
   }, []);
 
   function handleGateOpen() {
+    ensureAudioPlaying();
     setGateOpen(true);
     sessionStorage.setItem("gate-opened", "1");
   }
@@ -86,16 +99,6 @@ export default function Home() {
     setIntroDone(false);
   }
 
-  function toggleSound() {
-    if (soundOn) {
-      stopAmbientSound();
-      setSoundOn(false);
-    } else {
-      const ok = startAmbientSound();
-      setSoundOn(ok);
-    }
-  }
-
   return (
     <div
       data-theme={theme}
@@ -103,23 +106,32 @@ export default function Home() {
       style={{ backgroundColor: "var(--bg-outer)" }}
     >
       <AnimatePresence>
-        {!introDone && <BismillahIntro onComplete={() => setIntroDone(true)} />}
+        {!introDone && (
+          <BismillahIntro
+            onComplete={() => {
+              ensureAudioPlaying();
+              setIntroDone(true);
+            }}
+          />
+        )}
       </AnimatePresence>
 
-      {introDone && !gateOpen && <Gate onOpen={handleGateOpen} />}
+      {introDone && !gateOpen && (
+        <Gate onOpen={handleGateOpen} onStartAudio={ensureAudioPlaying} />
+      )}
 
       {/* Phone frame */}
       <div
         className="relative w-full max-w-[430px] h-[100dvh] mx-auto overflow-hidden shadow-2xl transition-colors duration-500"
         style={{
           backgroundColor: "var(--bg-ivory)",
-          borderLeft: "1px solid rgba(178,139,69,0.18)",
-          borderRight: "1px solid rgba(178,139,69,0.18)",
+          borderLeft: "1px solid rgba(223,201,138,0.2)",
+          borderRight: "1px solid rgba(223,201,138,0.2)",
         }}
       >
         {/* Scroll progress bar */}
         {gateOpen && (
-          <div className="no-print absolute top-0 inset-x-0 h-[2px] z-40 pointer-events-none" style={{ backgroundColor: "rgba(31,41,30,0.06)" }}>
+          <div className="no-print absolute top-0 inset-x-0 h-[2px] z-40 pointer-events-none" style={{ backgroundColor: "rgba(223,201,138,0.12)" }}>
             <div
               className="h-full transition-[width] duration-100"
               style={{
@@ -130,23 +142,9 @@ export default function Home() {
           </div>
         )}
 
-        {/* Top-right Theme & Sound micro controls */}
+        {/* Top-right Theme Toggle (Audio loops continuously with no turn-off button) */}
         {gateOpen && (
-          <div className="no-print absolute top-3 right-3 z-40 flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={toggleSound}
-              aria-label={soundOn ? "Mute ambient chimes" : "Play ambient chimes"}
-              title={soundOn ? "Mute ambient chimes" : "Play ambient chimes"}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-xs shadow-sm cursor-pointer transition-transform active:scale-90"
-              style={{
-                backgroundColor: "var(--bg-card)",
-                border: "1px solid var(--divider)",
-                color: "var(--ink-dark)",
-              }}
-            >
-              {soundOn ? "🔊" : "🔇"}
-            </button>
+          <div className="no-print absolute top-3 right-3 z-40 flex items-center">
             <button
               type="button"
               onClick={() => setTheme((t) => (t === "day" ? "night" : "day"))}
@@ -170,7 +168,7 @@ export default function Home() {
         {/* Main scrollable content */}
         <main
           ref={scrollRef}
-          className="invite-scroll"
+          className="invite-scroll pr-3"
           id="main-content"
           aria-label="Wedding invitation"
         >
@@ -193,8 +191,6 @@ export default function Home() {
           <DuaWall lang={lang} />
           <BotanicalDivider bg="var(--bg-linen)" />
           <Rsvp lang={lang} />
-          <BotanicalDivider bg="var(--bg-ivory)" />
-          <Compliments lang={lang} />
           <BotanicalDivider bg="var(--bg-linen)" />
           <Closing onReplay={handleReplay} lang={lang} />
         </main>

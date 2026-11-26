@@ -56,11 +56,11 @@ export default function BismillahIntro({ onComplete }: Props) {
       }}
       aria-label="Bismillah opening animation — tap to continue"
       className="fixed inset-0 z-[60] flex items-center justify-center cursor-pointer select-none"
-      style={{ backgroundColor: "var(--bg-outer)" }}
+      style={{ backgroundColor: "#111B10" }}
     >
       <div
         className="relative w-full max-w-[430px] h-[100dvh] flex flex-col items-center justify-center px-8 text-center shadow-2xl overflow-hidden"
-        style={{ backgroundColor: "var(--bg-ivory)" }}
+        style={{ backgroundColor: "#192718" }}
       >
         {/* Subtle radial glow */}
         <div
@@ -110,7 +110,7 @@ export default function BismillahIntro({ onComplete }: Props) {
           className="text-3xl sm:text-4xl"
           style={{
             fontFamily: "var(--font-arabic)",
-            color: "var(--sage-dark)",
+            color: "#DFC98A",
             lineHeight: 1.9,
           }}
         >
@@ -122,17 +122,17 @@ export default function BismillahIntro({ onComplete }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.85 }}
           className="mt-2 text-xs italic"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--gold-warm)" }}
+          style={{ fontFamily: "var(--font-serif)", color: "#F6F1E6" }}
         >
           {invite.arabic.bismillahTranslit}
         </motion.p>
 
         <motion.span
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.65 }}
+          animate={{ opacity: 0.7 }}
           transition={{ delay: 1.3, duration: 0.5 }}
           className="mt-10 text-[9px] tracking-[0.26em] uppercase"
-          style={{ fontFamily: "var(--font-sans)", color: "var(--ink-light)" }}
+          style={{ fontFamily: "var(--font-sans)", color: "#C8D9C4" }}
         >
           Tap anywhere to continue
         </motion.span>

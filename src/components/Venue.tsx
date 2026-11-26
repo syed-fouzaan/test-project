@@ -152,10 +152,10 @@ export default function Venue({ lang }: Props) {
 
         {/* Venue Quick-Info Pills */}
         <ScrollReveal variant="fade" delay={0.2}>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2.5">
             {[
               { icon: "🕌", label: lang === "ar" ? "النكاح ١١:٤٥ ص" : "Nikah 11:45 AM" },
-              { icon: "🍽️", label: lang === "ar" ? "الوليمة ١:٠٠ م" : "Walima 1:00 PM" },
+              { icon: "🍽️", label: lang === "ar" ? "الغداء ١:٠٠ م" : "Lunch 1:00 PM" },
               { icon: "🌸", label: lang === "ar" ? "أماكن مخصصة" : "Separate Seating" },
               { icon: "🚗", label: lang === "ar" ? "موقف سيارات" : "Parking Available" },
             ].map(({ icon, label }) => (

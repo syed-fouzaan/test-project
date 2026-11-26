@@ -27,9 +27,9 @@ export default function ShareBar({ lang, onToggleLang, scrollProgress }: Props) 
       transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="no-print absolute bottom-0 inset-x-0 z-30 flex items-center justify-between px-4 py-3"
       style={{
-        background:
-          "linear-gradient(to top, rgba(251,248,242,0.98) 60%, rgba(251,248,242,0))",
-        backdropFilter: "blur(6px)",
+        backgroundColor: "var(--bg-ivory)",
+        borderTop: "1px solid var(--divider)",
+        backdropFilter: "blur(10px)",
       }}
     >
       {/* Lang toggle */}

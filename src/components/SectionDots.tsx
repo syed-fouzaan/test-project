@@ -55,11 +55,11 @@ export default function SectionDots({ sections, scrollContainer }: Props) {
   return (
     <nav
       aria-label="Section navigation"
-      className="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-2 py-2 px-1 rounded-full"
+      className="absolute right-1.5 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-1.5 py-2 px-1 rounded-full"
       style={{
-        backgroundColor: "rgba(251, 248, 242, 0.7)",
-        backdropFilter: "blur(6px)",
-        border: "1px solid rgba(178, 139, 69, 0.2)",
+        backgroundColor: "rgba(25, 39, 24, 0.55)",
+        backdropFilter: "blur(8px)",
+        border: "1px solid rgba(223, 201, 138, 0.22)",
       }}
     >
       {sections.map((sec) => {
@@ -71,15 +71,15 @@ export default function SectionDots({ sections, scrollContainer }: Props) {
             onClick={() => scrollTo(sec.id)}
             aria-label={`Jump to ${sec.label}`}
             title={sec.label}
-            className="group relative flex items-center justify-center p-1 focus:outline-none cursor-pointer"
+            className="group relative flex items-center justify-center p-0.5 focus:outline-none cursor-pointer"
           >
             <motion.span
               animate={{
-                scale: isActive ? 1.35 : 1,
-                backgroundColor: isActive ? "#3A5236" : "rgba(126, 155, 120, 0.45)",
+                height: isActive ? 14 : 5,
+                backgroundColor: isActive ? "#DFC98A" : "rgba(223, 201, 138, 0.35)",
               }}
               transition={{ type: "spring", stiffness: 360, damping: 24 }}
-              className="block w-1.5 h-1.5 rounded-full"
+              className="block w-1.5 rounded-full"
             />
           </button>
         );

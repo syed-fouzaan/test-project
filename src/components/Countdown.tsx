@@ -21,9 +21,9 @@ function getTimeLeft() {
 
 const TIMELINE = [
   { time: "11:45 AM", label: "Nikah Ceremony", icon: "🕌" },
-  { time: "12:30 PM", label: "Qur'an Recitation & Dua", icon: "📖" },
-  { time: "01:00 PM", label: "Walima Lunch", icon: "🍽️" },
-  { time: "03:00 PM", label: "Masha'Allah — Celebration", icon: "🌸" },
+  { time: "12:15 PM", label: "Qur'an Recitation & Dua", icon: "📖" },
+  { time: "01:00 PM", label: "Dawat-e-Nikah (Lunch)", icon: "🍽️" },
+  { time: "02:30 PM", label: "Mubarak & Duas", icon: "🌸" },
 ];
 
 export default function Countdown({ lang }: Props) {
@@ -144,19 +144,21 @@ export default function Countdown({ lang }: Props) {
               </span>
             </div>
 
-            <div className="timeline-strip" role="region" aria-label="Day programme timeline">
+            <div className="timeline-strip px-1" role="region" aria-label="Day programme timeline">
               {TIMELINE.map(({ time: t, label, icon }, i) => (
                 <motion.div
                   key={t}
                   initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -3, scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.45 }}
-                  className="snap-center shrink-0 w-[165px] rounded-2xl p-4 flex flex-col justify-between gap-3"
+                  className="snap-center shrink-0 w-[156px] rounded-2xl p-3.5 flex flex-col justify-between gap-3 cursor-pointer"
                   style={{
                     background: "var(--bg-card)",
                     border: "1px solid var(--divider)",
-                    boxShadow: "0 4px 16px rgba(31,41,30,0.05)",
+                    boxShadow: "0 6px 20px rgba(0,0,0,0.14)",
                   }}
                 >
                   <div className="flex items-center justify-between">
