@@ -11,7 +11,6 @@ import Countdown from "@/components/Countdown";
 import Venue from "@/components/Venue";
 import Memories from "@/components/Memories";
 import DuaWall from "@/components/DuaWall";
-import Rsvp from "@/components/Rsvp";
 import Closing from "@/components/Closing";
 import ShareBar from "@/components/ShareBar";
 import SectionDots, { SectionItem } from "@/components/SectionDots";
@@ -28,7 +27,6 @@ const SECTIONS: SectionItem[] = [
   { id: "families", label: "Families" },
   { id: "memories", label: "Memories" },
   { id: "duas", label: "Duas" },
-  { id: "rsvp", label: "RSVP" },
   { id: "closing", label: "Closing" },
 ];
 
@@ -194,8 +192,6 @@ export default function Home() {
           <ScrollChapter scrollContainer={scrollRef}><Memories lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-ivory)" />
           <ScrollChapter scrollContainer={scrollRef}><DuaWall lang={lang} /></ScrollChapter>
-          <BotanicalDivider bg="var(--bg-linen)" />
-          <ScrollChapter scrollContainer={scrollRef}><Rsvp lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-linen)" />
           <ScrollChapter scrollContainer={scrollRef}><Closing onReplay={handleReplay} lang={lang} /></ScrollChapter>
         </main>
