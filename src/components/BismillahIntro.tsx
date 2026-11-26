@@ -36,10 +36,7 @@ export default function BismillahIntro({ onComplete }: Props) {
         easing: "easeInOutSine",
       });
     }
-
-    const timer = setTimeout(onComplete, 2600);
-    return () => clearTimeout(timer);
-  }, [onComplete]);
+  }, []);
 
   return (
     <motion.div
