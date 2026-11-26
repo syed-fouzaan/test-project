@@ -16,6 +16,8 @@ import Closing from "@/components/Closing";
 import ShareBar from "@/components/ShareBar";
 import SectionDots, { SectionItem } from "@/components/SectionDots";
 import BotanicalDivider from "@/components/ornaments/BotanicalDivider";
+import { ScrollChapter } from "@/components/ScrollReveal";
+import TapSparkles from "@/components/TapSparkles";
 import { startAmbientSound, stopAmbientSound } from "@/lib/ambientAudio";
 
 const SECTIONS: SectionItem[] = [
@@ -43,6 +45,7 @@ export default function Home() {
   const [theme, setTheme] = useState<"day" | "night">("night");
   const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
   const audioStartedRef = useRef(false);
 
   function ensureAudioPlaying() {
@@ -122,6 +125,7 @@ export default function Home() {
 
       {/* Phone frame */}
       <div
+        ref={frameRef}
         className="relative w-full max-w-[430px] h-[100dvh] mx-auto overflow-hidden shadow-2xl transition-colors duration-500"
         style={{
           backgroundColor: "var(--bg-ivory)",
@@ -129,6 +133,7 @@ export default function Home() {
           borderRight: "1px solid rgba(223,201,138,0.2)",
         }}
       >
+        <TapSparkles containerRef={frameRef} />
         {/* Scroll progress bar */}
         {gateOpen && (
           <div className="no-print absolute top-0 inset-x-0 h-[2px] z-40 pointer-events-none" style={{ backgroundColor: "rgba(223,201,138,0.12)" }}>
@@ -178,21 +183,21 @@ export default function Home() {
             scrollContainer={scrollRef}
           />
           <BotanicalDivider bg="var(--bg-linen)" />
-          <DateTime lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><DateTime lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-ivory)" />
-          <Countdown lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><Countdown lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-linen)" />
-          <Venue lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><Venue lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-ivory)" />
-          <Families lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><Families lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-linen)" />
-          <Memories lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><Memories lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-ivory)" />
-          <DuaWall lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><DuaWall lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-linen)" />
-          <Rsvp lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><Rsvp lang={lang} /></ScrollChapter>
           <BotanicalDivider bg="var(--bg-linen)" />
-          <Closing onReplay={handleReplay} lang={lang} />
+          <ScrollChapter scrollContainer={scrollRef}><Closing onReplay={handleReplay} lang={lang} /></ScrollChapter>
         </main>
 
         {/* Floating bottom bar */}

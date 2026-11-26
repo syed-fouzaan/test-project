@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { buildShareUrl } from "@/lib/whatsapp";
 import { invite } from "@/data/invite";
@@ -12,6 +13,17 @@ interface Props {
 
 export default function Closing({ onReplay, lang }: Props) {
   const shareUrl = buildShareUrl();
+  const [ameenCount, setAmeenCount] = useState(19);
+  const [hearts, setHearts] = useState<number[]>([]);
+
+  function sendAmeen() {
+    setAmeenCount((c) => c + 1);
+    const id = Date.now() + Math.random();
+    setHearts((prev) => [...prev.slice(-6), id]);
+    setTimeout(() => {
+      setHearts((prev) => prev.filter((h) => h !== id));
+    }, 1100);
+  }
 
   function handleShare() {
     if (navigator.share) {
@@ -98,6 +110,31 @@ export default function Closing({ onReplay, lang }: Props) {
         {/* Action buttons */}
         <ScrollReveal variant="up" delay={0.2}>
           <div className="no-print flex flex-col gap-3 w-full">
+            <div className="relative flex justify-center">
+              <AnimatePresence>
+                {hearts.map((id) => (
+                  <motion.span
+                    key={id}
+                    initial={{ opacity: 1, y: 0, scale: 0.7 }}
+                    animate={{ opacity: 0, y: -64, scale: 1.4 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.95, ease: "easeOut" }}
+                    className="absolute -top-2 pointer-events-none text-lg"
+                    aria-hidden="true"
+                  >
+                    💛
+                  </motion.span>
+                ))}
+              </AnimatePresence>
+              <motion.button
+                type="button"
+                whileTap={{ scale: 0.93 }}
+                onClick={sendAmeen}
+                className="btn-ivory w-full"
+              >
+                🤲 &nbsp;{lang === "ar" ? "آمين" : "Tap to Say Ameen"} ({ameenCount})
+              </motion.button>
+            </div>
             <button type="button" onClick={handleShare} className="btn-sage">
               🔗 &nbsp;{lang === "ar" ? "مشاركة الدعوة" : "Share this Invite"}
             </button>

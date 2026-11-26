@@ -106,12 +106,19 @@ export default function Venue({ lang }: Props) {
                 <line x1="0" y1="80" x2="400" y2="80" stroke="rgba(255,255,255,0.6)" strokeWidth="6" />
                 <line x1="160" y1="0" x2="160" y2="160" stroke="rgba(255,255,255,0.4)" strokeWidth="4" />
               </svg>
-              {/* Pin */}
+              {/* Pin with pulsing radar rings */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
+                  animate={{ scale: [1, 2.2], opacity: [0.55, 0] }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+                  className="absolute w-12 h-12 rounded-full pointer-events-none"
+                  style={{ border: "2px solid #3A5236" }}
+                />
+                <motion.div
                   animate={{ y: [0, -7, 0] }}
+                  whileTap={{ scale: 1.25 }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex flex-col items-center"
+                  className="relative flex flex-col items-center cursor-pointer"
                 >
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg text-xl"
@@ -126,7 +133,7 @@ export default function Venue({ lang }: Props) {
                       border: "1px solid var(--divider)",
                     }}
                   >
-                    <p style={{ fontFamily: "var(--font-sans)", fontSize: 9, fontWeight: 600, color: "var(--ink-dark)" }}>
+                    <p style={{ fontFamily: "var(--font-sans)", fontSize: 9, fontWeight: 600, color: "#1E2A1D" }}>
                       {invite.event.venue.name}
                     </p>
                   </div>

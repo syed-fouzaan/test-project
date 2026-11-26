@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
 interface Props { lang: "en" | "ar" }
@@ -20,14 +20,15 @@ function getTimeLeft() {
 }
 
 const TIMELINE = [
-  { time: "11:45 AM", label: "Nikah Ceremony", icon: "🕌" },
-  { time: "12:15 PM", label: "Qur'an Recitation & Dua", icon: "📖" },
-  { time: "01:00 PM", label: "Dawat-e-Nikah (Lunch)", icon: "🍽️" },
-  { time: "02:30 PM", label: "Mubarak & Duas", icon: "🌸" },
+  { time: "11:45 AM", label: "Nikah Ceremony", icon: "🕌", note: "Sunnah Nikah at Arsh Garden main pavilion — please join 15 mins early." },
+  { time: "12:15 PM", label: "Qur'an Recitation & Dua", icon: "📖", note: "Blessed recitation & collective dua for the newlyweds." },
+  { time: "01:00 PM", label: "Dawat-e-Nikah (Lunch)", icon: "🍽️", note: "Warm hospitality & traditional feast served for all guests." },
+  { time: "02:30 PM", label: "Mubarak & Duas", icon: "🌸", note: "Meet the families, share blessings, and capture memories." },
 ];
 
 export default function Countdown({ lang }: Props) {
   const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(0);
 
   useEffect(() => {
     setTime(getTimeLeft());
@@ -145,44 +146,74 @@ export default function Countdown({ lang }: Props) {
             </div>
 
             <div className="timeline-strip px-1" role="region" aria-label="Day programme timeline">
-              {TIMELINE.map(({ time: t, label, icon }, i) => (
+              {TIMELINE.map(({ time: t, label, icon }, i) => {
+                const isSelected = selectedIdx === i;
+                return (
+                  <motion.button
+                    key={t}
+                    type="button"
+                    onClick={() => setSelectedIdx(isSelected ? null : i)}
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ y: -3, scale: 1.02 }}
+                    whileTap={{ scale: 0.96 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.45 }}
+                    className="snap-center shrink-0 w-[156px] rounded-2xl p-3.5 flex flex-col justify-between gap-3 cursor-pointer text-left"
+                    style={{
+                      background: "var(--bg-card)",
+                      border: isSelected ? "1.5px solid var(--gold-warm)" : "1px solid var(--divider)",
+                      boxShadow: isSelected
+                        ? "0 8px 24px rgba(178,139,69,0.22)"
+                        : "0 6px 20px rgba(0,0,0,0.14)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between w-full">
+                      <span className="text-2xl" aria-hidden="true">{icon}</span>
+                      <span
+                        className="px-2 py-0.5 rounded-full text-[9px] font-semibold"
+                        style={{
+                          backgroundColor: "var(--bg-linen)",
+                          color: "var(--sage-dark)",
+                          fontFamily: "var(--font-sans)",
+                        }}
+                      >
+                        {t}
+                      </span>
+                    </div>
+                    <p
+                      className="text-sm leading-snug"
+                      style={{ fontFamily: "var(--font-serif)", color: "var(--ink-dark)", fontWeight: 600 }}
+                    >
+                      {label}
+                    </p>
+                  </motion.button>
+                );
+              })}
+            </div>
+
+            {/* Interactive programme detail card */}
+            <AnimatePresence mode="wait">
+              {selectedIdx !== null && TIMELINE[selectedIdx] && (
                 <motion.div
-                  key={t}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08, duration: 0.45 }}
-                  className="snap-center shrink-0 w-[156px] rounded-2xl p-3.5 flex flex-col justify-between gap-3 cursor-pointer"
+                  key={selectedIdx}
+                  initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  className="rounded-xl px-3.5 py-2.5 text-xs"
                   style={{
-                    background: "var(--bg-card)",
+                    backgroundColor: "var(--bg-card)",
                     border: "1px solid var(--divider)",
-                    boxShadow: "0 6px 20px rgba(0,0,0,0.14)",
+                    color: "var(--ink-muted)",
+                    fontFamily: "var(--font-serif)",
                   }}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl" aria-hidden="true">{icon}</span>
-                    <span
-                      className="px-2 py-0.5 rounded-full text-[9px] font-semibold"
-                      style={{
-                        backgroundColor: "var(--bg-linen)",
-                        color: "var(--sage-dark)",
-                        fontFamily: "var(--font-sans)",
-                      }}
-                    >
-                      {t}
-                    </span>
-                  </div>
-                  <p
-                    className="text-sm leading-snug"
-                    style={{ fontFamily: "var(--font-serif)", color: "var(--ink-dark)", fontWeight: 600 }}
-                  >
-                    {label}
-                  </p>
+                  <strong style={{ color: "var(--sage-dark)" }}>{TIMELINE[selectedIdx].time}:</strong>{" "}
+                  {TIMELINE[selectedIdx].note}
                 </motion.div>
-              ))}
-            </div>
+              )}
+            </AnimatePresence>
           </div>
         </ScrollReveal>
 
