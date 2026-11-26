@@ -12,12 +12,12 @@ export const invite = {
   },
   bride: {
     name: "Zeba Kausar",
-    parents: ["Mr. Kaseem Sab Imamsab", "Mrs. Kaseem Sab Imamsab"],
+    parents: ["Mr. Kaseem Sab", "Mrs. Raziya Begum"],
     place: "Manchankoppa",
   },
   groom: {
     name: "Mohammed Yasin M. Gouli",
-    parents: ["Mr. Sharif Sab Moulasab Gouli", "Mrs. Raziya Sharif Gouli"],
+    parents: ["Mr. Sharif Sab Gouli", "Mrs. Raziya Sharif Gouli"],
     place: "Sutagatti, Hubli",
   },
   compliments: {

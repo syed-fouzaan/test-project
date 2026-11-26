@@ -193,7 +193,7 @@ export default function CoupleNames({ recipientName, lang, scrollContainer }: Pr
             className="text-xs mt-1"
             style={{ fontFamily: "var(--font-serif)", color: "var(--ink-muted)", fontStyle: "italic" }}
           >
-            {lang === "ar" ? "كريمة " : "D/O "}{invite.bride.parents[0]}
+            {lang === "ar" ? "كريمة " : "D/O "}{invite.bride.parents.join(" & ")}
           </p>
           <p className="text-[10px] mt-0.5 tracking-widest" style={{ fontFamily: "var(--font-sans)", color: "var(--sage-mid)" }}>
             {invite.bride.place}
@@ -233,7 +233,7 @@ export default function CoupleNames({ recipientName, lang, scrollContainer }: Pr
             className="text-xs mt-1"
             style={{ fontFamily: "var(--font-serif)", color: "var(--ink-muted)", fontStyle: "italic" }}
           >
-            {lang === "ar" ? "نجل " : "S/O "}{invite.groom.parents[0]}
+            {lang === "ar" ? "نجل " : "S/O "}{invite.groom.parents.join(" & ")}
           </p>
           <p className="text-[10px] mt-0.5 tracking-widest" style={{ fontFamily: "var(--font-sans)", color: "var(--sage-mid)" }}>
             {invite.groom.place}
