@@ -87,22 +87,22 @@ function ScratchCard({ onReveal }: { onReveal: () => void }) {
 
   return (
     <div className="relative w-full" style={{ aspectRatio: "2.4 / 1" }}>
-      {/* Revealed layer underneath */}
+      {/* Revealed layer underneath (explicit dark ink on gold foil for crisp readability) */}
       <div
         className="absolute inset-0 rounded-2xl flex flex-col items-center justify-center"
         style={{
           background: "linear-gradient(135deg, #EDE1CC 0%, #DFC98A 50%, #EDE1CC 100%)",
-          border: "1px solid var(--divider)",
+          border: "1px solid rgba(178,139,69,0.5)",
         }}
       >
-        <span style={{ fontFamily: "var(--font-sans)", fontSize: 9, letterSpacing: "0.22em", color: "var(--sage-dark)", textTransform: "uppercase", marginBottom: 4 }}>
+        <span style={{ fontFamily: "var(--font-sans)", fontSize: 9, fontWeight: 700, letterSpacing: "0.22em", color: "#3A5236", textTransform: "uppercase", marginBottom: 4 }}>
           Date Revealed ✦
         </span>
-        <p style={{ fontFamily: "var(--font-script)", fontSize: 32, color: "var(--ink-dark)", lineHeight: 1 }}>
+        <p style={{ fontFamily: "var(--font-script)", fontSize: 34, color: "#1E2A1D", lineHeight: 1 }}>
           19 December
         </p>
-        <p style={{ fontFamily: "var(--font-sans)", fontSize: 11, color: "var(--sage-mid)", letterSpacing: "0.1em", marginTop: 2 }}>
-          2026
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 600, color: "#3A5236", letterSpacing: "0.14em", marginTop: 3 }}>
+          2026 • 9 RAJAB 1448 AH
         </p>
       </div>
 
@@ -243,6 +243,7 @@ export default function DateTime({ lang }: Props) {
               >
                 {[
                   { icon: "📅", label: lang === "ar" ? "التاريخ" : "Date", value: "Saturday, 19 December 2026" },
+                  { icon: "🌙", label: lang === "ar" ? "التاريخ الهجري" : "Hijri Date", value: "9 Rajab 1448 AH (Insha'Allah)" },
                   { icon: "🕌", label: lang === "ar" ? "الوقت" : "Nikah Time", value: "11:45 AM onwards" },
                   { icon: "🌿", label: lang === "ar" ? "المكان" : "Venue", value: `${invite.event.venue.name}, ${invite.event.venue.address}` },
                 ].map(({ icon, label, value }) => (

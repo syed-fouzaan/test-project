@@ -145,9 +145,25 @@ export default function Home() {
           </div>
         )}
 
-        {/* Top-right Theme Toggle (Audio loops continuously with no turn-off button) */}
+        {/* Top-right Theme & Back-to-Top micro controls */}
         {gateOpen && (
-          <div className="no-print absolute top-3 right-3 z-40 flex items-center">
+          <div className="no-print absolute top-3 right-3 z-40 flex items-center gap-1.5">
+            {scrollProgress > 18 && (
+              <button
+                type="button"
+                onClick={() => scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" })}
+                aria-label="Scroll back to top"
+                title="Back to top"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shadow-sm cursor-pointer transition-transform active:scale-90"
+                style={{
+                  backgroundColor: "var(--bg-card)",
+                  border: "1px solid var(--divider)",
+                  color: "var(--sage-dark)",
+                }}
+              >
+                ↑
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setTheme((t) => (t === "day" ? "night" : "day"))}

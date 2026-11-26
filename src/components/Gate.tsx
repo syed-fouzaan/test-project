@@ -76,7 +76,7 @@ export default function Gate({ onOpen, onStartAudio }: GateProps) {
     if (opening) return;
     onStartAudio?.();
     setOpening(true);
-    setTimeout(onOpen, 1150);
+    setTimeout(onOpen, 2100);
   }
 
   return (
@@ -84,10 +84,10 @@ export default function Gate({ onOpen, onStartAudio }: GateProps) {
       initial={{ opacity: 1, scale: 1 }}
       animate={
         opening
-          ? { opacity: 0, scale: 2.6 }
+          ? { opacity: 0, scale: 1.48 }
           : { opacity: 1, scale: 1 }
       }
-      transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 2.0, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: "var(--bg-outer)", transformOrigin: "50% 50%" }}
     >
@@ -128,8 +128,8 @@ export default function Gate({ onOpen, onStartAudio }: GateProps) {
           className="absolute inset-0 z-20 flex cursor-pointer select-none focus:outline-none"
         >
           <motion.div
-            animate={opening ? { x: "-115%", rotateY: 28, opacity: 0.2 } : { x: "0%", rotateY: 0, opacity: 1 }}
-            transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+            animate={opening ? { x: "-115%", rotateY: 24, opacity: 0.2 } : { x: "0%", rotateY: 0, opacity: 1 }}
+            transition={{ duration: 1.75, ease: [0.22, 1, 0.36, 1] }}
             className="w-1/2 h-full"
             style={{ transformOrigin: "left center" }}
           >
@@ -137,8 +137,8 @@ export default function Gate({ onOpen, onStartAudio }: GateProps) {
           </motion.div>
 
           <motion.div
-            animate={opening ? { x: "115%", rotateY: -28, opacity: 0.2 } : { x: "0%", rotateY: 0, opacity: 1 }}
-            transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+            animate={opening ? { x: "115%", rotateY: -24, opacity: 0.2 } : { x: "0%", rotateY: 0, opacity: 1 }}
+            transition={{ duration: 1.75, ease: [0.22, 1, 0.36, 1] }}
             className="w-1/2 h-full"
             style={{ transformOrigin: "right center" }}
           >
@@ -147,10 +147,10 @@ export default function Gate({ onOpen, onStartAudio }: GateProps) {
 
           {/* Sci-Fi Orbital Reticle Rings around Center Plaque */}
           <motion.div
-            animate={opening ? { scale: 4, opacity: 0, rotate: 90 } : { rotate: 360 }}
+            animate={opening ? { scale: 2.2, opacity: 0, rotate: 60 } : { rotate: 360 }}
             transition={
               opening
-                ? { duration: 0.9, ease: [0.16, 1, 0.3, 1] }
+                ? { duration: 1.65, ease: [0.16, 1, 0.3, 1] }
                 : { duration: 24, repeat: Infinity, ease: "linear" }
             }
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-25 pointer-events-none rounded-full"
@@ -177,20 +177,20 @@ export default function Gate({ onOpen, onStartAudio }: GateProps) {
             }}
           />
 
-          {/* Center Plaque (Zooms in on tap) */}
+          {/* Center Plaque (Slow cinematic zoom-in on tap) */}
           <motion.div
             initial={{ scale: 0.88, opacity: 0 }}
             animate={
               opening
-                ? { scale: 2.8, opacity: 0 }
+                ? { scale: 1.55, opacity: 0 }
                 : { scale: 1, opacity: 1 }
             }
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.94 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             transition={
               opening
-                ? { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
-                : { type: "spring", stiffness: 240, damping: 18 }
+                ? { duration: 1.55, ease: [0.16, 1, 0.3, 1] }
+                : { type: "spring", stiffness: 220, damping: 20 }
             }
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30"
           >

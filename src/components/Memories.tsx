@@ -29,8 +29,8 @@ const MEMORIES: PolaroidItem[] = [
     caption: "And We created you in pairs — Quran 78:8. Two families united in faith, love, and gratitude.",
     captionAr: "وَخَلَقْنَاكُمْ أَزْوَاجًا — أسرتان تجتمعان على المودة والرحمة.",
     icon: "🌿",
-    rotate: -2,
-    gradient: "linear-gradient(145deg, #EDE1CC 0%, #C8D9C4 100%)",
+    rotate: -1.5,
+    gradient: "linear-gradient(145deg, rgba(58,82,54,0.65) 0%, rgba(36,55,34,0.9) 100%)",
   },
   {
     id: "date",
@@ -40,8 +40,8 @@ const MEMORIES: PolaroidItem[] = [
     caption: "A winter morning of duas, warm smiles, and celebration with everyone we hold dear.",
     captionAr: "صباح شتوي مليء بالدعاء والابتسامات والاحتفال مع الأحبة.",
     icon: "🕌",
-    rotate: 2,
-    gradient: "linear-gradient(145deg, #C8D9C4 0%, #DFC98A 100%)",
+    rotate: 1.5,
+    gradient: "linear-gradient(145deg, rgba(45,66,43,0.8) 0%, rgba(178,139,69,0.28) 100%)",
   },
   {
     id: "blessing",
@@ -51,8 +51,8 @@ const MEMORIES: PolaroidItem[] = [
     caption: "Your presence and heartfelt duas are the greatest gift on our Nikah day.",
     captionAr: "حضوركم ودعاؤكم الصادق هو أجمل هدية في يوم زفافنا.",
     icon: "🤍",
-    rotate: -1.5,
-    gradient: "linear-gradient(145deg, #F4EFE4 0%, #EDE1CC 100%)",
+    rotate: -1,
+    gradient: "linear-gradient(145deg, rgba(32,49,30,0.85) 0%, rgba(58,82,54,0.6) 100%)",
   },
 ];
 
@@ -82,41 +82,44 @@ function PolaroidCard({ item, lang, index }: { item: PolaroidItem; lang: "en" | 
           className="relative w-full h-[186px]"
           style={{ transformStyle: "preserve-3d" }}
         >
-          {/* Front Face (Polaroid) */}
+          {/* Front Face (Polaroid — dark & light adaptive contrast) */}
           <div
-            className="absolute inset-0 rounded-2xl p-3 pb-4 flex flex-col justify-between shadow-md"
+            className="absolute inset-0 rounded-2xl p-3 pb-4 flex flex-col justify-between shadow-lg"
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "var(--bg-card)",
               border: "1px solid var(--divider)",
               backfaceVisibility: "hidden",
             }}
           >
             <div
-              className="w-full h-[112px] rounded-xl flex flex-col items-center justify-center gap-1"
-              style={{ background: item.gradient }}
+              className="w-full h-[112px] rounded-xl flex flex-col items-center justify-center gap-1.5"
+              style={{
+                background: item.gradient,
+                border: "1px solid var(--divider)",
+              }}
             >
               <span className="text-3xl" aria-hidden="true">{item.icon}</span>
               <span
-                className="text-[9px] tracking-[0.18em] uppercase"
-                style={{ fontFamily: "var(--font-sans)", color: "var(--sage-dark)", opacity: 0.75 }}
+                className="text-[10px] font-semibold tracking-[0.2em] uppercase"
+                style={{ fontFamily: "var(--font-sans)", color: "#DFC98A" }}
               >
                 {item.subtitle}
               </span>
             </div>
-            <div className="flex items-center justify-between pt-2 px-1">
+            <div className="flex items-center justify-between pt-2.5 px-1">
               <p
                 style={{
                   fontFamily: lang === "ar" ? "var(--font-arabic)" : "var(--font-script)",
-                  fontSize: lang === "ar" ? 16 : 22,
+                  fontSize: lang === "ar" ? 16 : 24,
                   color: "var(--ink-dark)",
-                  lineHeight: 1.1,
+                  lineHeight: 1.15,
                 }}
               >
                 {lang === "ar" ? item.titleAr : item.title}
               </p>
               <span
-                className="text-[9px] tracking-wider uppercase"
-                style={{ fontFamily: "var(--font-sans)", color: "var(--ink-light)" }}
+                className="text-[9px] font-medium tracking-wider uppercase"
+                style={{ fontFamily: "var(--font-sans)", color: "var(--sage-dark)" }}
               >
                 {lang === "ar" ? "اقلب ↺" : "Tap ↺"}
               </span>
