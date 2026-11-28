@@ -44,13 +44,9 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
-  const audioStartedRef = useRef(false);
 
   function ensureAudioPlaying() {
-    if (audioStartedRef.current) return;
-    if (startAmbientSound()) {
-      audioStartedRef.current = true;
-    }
+    startAmbientSound();
   }
 
   useEffect(() => {
