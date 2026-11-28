@@ -157,32 +157,6 @@ export default function Venue({ lang }: Props) {
           </div>
         </ScrollReveal>
 
-        {/* Venue Quick-Info Pills */}
-        <ScrollReveal variant="fade" delay={0.2}>
-          <div className="grid grid-cols-2 gap-2.5">
-            {[
-              { icon: "🕌", label: lang === "ar" ? "النكاح ١١:٤٥ ص" : "Nikah 11:45 AM" },
-              { icon: "🍽️", label: lang === "ar" ? "الغداء ١:٠٠ م" : "Lunch 1:00 PM" },
-              { icon: "🌸", label: lang === "ar" ? "أماكن مخصصة" : "Separate Seating" },
-              { icon: "🚗", label: lang === "ar" ? "موقف سيارات" : "Parking Available" },
-            ].map(({ icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl text-[11px]"
-                style={{
-                  backgroundColor: "var(--bg-card)",
-                  border: "1px solid var(--divider)",
-                  color: "var(--ink-dark)",
-                  fontFamily: "var(--font-sans)",
-                }}
-              >
-                <span aria-hidden="true">{icon}</span>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-
       </div>
     </section>
   );

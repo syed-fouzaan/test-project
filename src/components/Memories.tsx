@@ -89,6 +89,7 @@ function PolaroidCard({ item, lang, index }: { item: PolaroidItem; lang: "en" | 
               backgroundColor: "var(--bg-card)",
               border: "1px solid var(--divider)",
               backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
             }}
           >
             <div
@@ -134,6 +135,7 @@ function PolaroidCard({ item, lang, index }: { item: PolaroidItem; lang: "en" | 
               color: "#FBF8F2",
               border: "1px solid rgba(223,201,138,0.45)",
               backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
             }}
           >
@@ -161,7 +163,7 @@ export default function Memories({ lang }: Props) {
   return (
     <section
       id="memories"
-      className="snap-section px-5 py-14"
+      className="snap-section px-5 py-14 pb-20"
       style={{ backgroundColor: "var(--bg-linen)" }}
       aria-label="Keepsake memories"
     >
