@@ -184,10 +184,10 @@ export default function Home() {
         {/* Section dots navigator */}
         {gateOpen && <SectionDots sections={SECTIONS} scrollContainer={scrollRef} />}
 
-        {/* Main scrollable content */}
+        {/* Main scrollable content (pr-7 ensures SectionDots never overlaps cards on mobile) */}
         <main
           ref={scrollRef}
-          className="invite-scroll pr-3"
+          className="invite-scroll pr-7"
           id="main-content"
           aria-label="Wedding invitation"
         >
